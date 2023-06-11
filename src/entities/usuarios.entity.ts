@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Canciones } from './canciones.entity';
+import { Likes } from './likes.entity';
 
 @Entity({ name: 'usuarios' })
 export class Usuarios {
@@ -22,7 +23,7 @@ export class Usuarios {
   @Column()
   apellido: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, unique: true })
   email: string;
 
   @Column({ nullable: false })
@@ -30,6 +31,9 @@ export class Usuarios {
 
   @OneToMany(() => Canciones, (canciones) => canciones.usuario)
   canciones: Canciones[];
+
+  @OneToMany(() => Likes, (likes) => likes.usuario)
+  likes: Likes[];
 
   @Column({ nullable: false, type: 'date' })
   fecha_nacimiento: Date;
