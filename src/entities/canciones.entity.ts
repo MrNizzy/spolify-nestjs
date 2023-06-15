@@ -14,7 +14,7 @@ export class Canciones {
 
   @ManyToOne(() => Usuarios, (usuario) => usuario.canciones, { cascade: true })
   @JoinColumn({ name: 'id_usuario' })
-  usuario: string;
+  usuario: Usuarios;
 
   @Column()
   titulo: string;
@@ -26,7 +26,7 @@ export class Canciones {
   album: string;
 
   @Column()
-  año: number;
+  date: string;
 
   @Column()
   genero: string;

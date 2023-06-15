@@ -17,11 +17,11 @@ export class Likes {
 
   @ManyToOne(() => Usuarios, (usuario) => usuario.likes, { cascade: true })
   @JoinColumn({ name: 'usuario_id' })
-  usuario: string;
+  usuario: number;
 
   @OneToOne(() => Usuarios, (cancion) => cancion.likes, { cascade: true })
   @JoinColumn({ name: 'cancion_id' })
-  cancion: string;
+  cancion: number;
 
   @Column()
   like: boolean;
