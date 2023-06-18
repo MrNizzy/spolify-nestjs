@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   Param,
@@ -17,6 +18,7 @@ import * as fs from 'fs';
 import { CancionesService } from './canciones.service';
 import { cancionPostDto } from './dto/cancion-post.dto';
 import { Canciones } from 'src/entities/canciones.entity';
+import { generosDto } from './dto/generos.dto';
 
 @Controller('canciones')
 export class CancionesController {
@@ -61,7 +63,14 @@ export class CancionesController {
     await this.cancionesService.guardarCancion(cancion, id_usuario);
     return { msg: 'Archivo subido correctamente', file, metadata };
   }
-
+  @Get('generos')
+  async obtenerGeneros() {
+    return this.cancionesService.obtenerGeneros();
+  }
+  @Post('generos')
+  async getCancionesPorGenero(@Body() genero: generosDto) {
+    return this.cancionesService.getCancionesPorGenero(genero.nombre);
+  }
   @Get('view/:filename')
   async viewFile(@Param('filename') filename: string, @Res() res: Response) {
     try {
