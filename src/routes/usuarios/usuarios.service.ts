@@ -13,4 +13,10 @@ export class UsuariosService {
   async getUsuarios() {
     return await this.usuariosRepository.find();
   }
+
+  async getUsuarioPorId(id: number) {
+    return await this.usuariosRepository.findOne({
+      where: { id },
+    });
+  }
 }

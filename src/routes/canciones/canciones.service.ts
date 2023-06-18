@@ -30,7 +30,7 @@ export class CancionesService {
     await this.cancionesRepository.save(nuevaCancion);
   }
 
-  async obtenerCancionesPorUsuario(id_usuario: number): Promise<Canciones[]> {
+  async getCancionesPorUsuario(id_usuario: number): Promise<Canciones[]> {
     return this.cancionesRepository.find({
       where: {
         usuario: { id: id_usuario },

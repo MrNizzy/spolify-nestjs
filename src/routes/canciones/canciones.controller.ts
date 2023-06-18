@@ -29,6 +29,11 @@ export class CancionesController {
     return this.cancionesService.obtenerCanciones();
   }
 
+  @Get('/:id')
+  async getCancionesPorUsuario(@Param('id') id: number) {
+    return this.cancionesService.getCancionesPorUsuario(id);
+  }
+
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
@@ -63,14 +68,17 @@ export class CancionesController {
     await this.cancionesService.guardarCancion(cancion, id_usuario);
     return { msg: 'Archivo subido correctamente', file, metadata };
   }
+
   @Get('generos')
   async obtenerGeneros() {
     return this.cancionesService.obtenerGeneros();
   }
+
   @Post('generos')
   async getCancionesPorGenero(@Body() genero: generosDto) {
     return this.cancionesService.getCancionesPorGenero(genero.nombre);
   }
+
   @Get('view/:filename')
   async viewFile(@Param('filename') filename: string, @Res() res: Response) {
     try {
