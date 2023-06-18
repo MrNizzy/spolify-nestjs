@@ -38,6 +38,26 @@ export class CancionesService {
     });
   }
 
+  async obtenerGeneros(): Promise<string[]> {
+    const query = this.cancionesRepository
+      .createQueryBuilder('cancion')
+      .select('DISTINCT cancion.genero', 'genero')
+      .getRawMany();
+
+    const result = await query;
+
+    return result.map((item) => item.genero);
+  }
+
+  async getCancionesPorGenero(genero: string): Promise<Canciones[]> {
+    return this.cancionesRepository.find({
+      relations: ['usuario'],
+      where: {
+        genero: genero,
+      },
+    });
+  }
+
   async obtenerCanciones() {
     return await this.cancionesRepository.find({ relations: ['usuario'] });
   }
