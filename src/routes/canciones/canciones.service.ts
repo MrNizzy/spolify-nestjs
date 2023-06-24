@@ -46,7 +46,7 @@ export class CancionesService {
 
     const result = await query;
 
-    return result.map((item) => item.genero);
+    return await result.map((item) => item.genero);
   }
 
   async getCancionesPorGenero(genero: string): Promise<Canciones[]> {

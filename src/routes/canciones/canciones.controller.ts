@@ -69,14 +69,14 @@ export class CancionesController {
     return { msg: 'Archivo subido correctamente', file, metadata };
   }
 
-  @Get('generos')
-  async obtenerGeneros() {
-    return this.cancionesService.obtenerGeneros();
-  }
-
   @Post('generos')
   async getCancionesPorGenero(@Body() genero: generosDto) {
     return this.cancionesService.getCancionesPorGenero(genero.nombre);
+  }
+
+  @Get('generos/all')
+  getAllGeneros() {
+    return this.cancionesService.obtenerGeneros();
   }
 
   @Get('view/:filename')
