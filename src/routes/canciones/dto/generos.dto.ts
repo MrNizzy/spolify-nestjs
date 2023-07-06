@@ -1,3 +1,3 @@
 export class generosDto {
-  nombre: string;
+  genero: string;
 }

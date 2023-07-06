@@ -5,6 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CancionesModule } from './routes/canciones/canciones.module';
 import { UsuariosModule } from './routes/usuarios/usuarios.module';
 import { AuthModule } from './routes/auth/auth.module';
+import { Canciones } from './entities/canciones.entity';
+import { Usuarios } from './entities/usuarios.entity';
+import { Likes } from './entities/likes.entity';
 
 @Module({
   imports: [
@@ -15,7 +18,7 @@ import { AuthModule } from './routes/auth/auth.module';
       username: 'root',
       password: '',
       database: 'spolify',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: [Canciones, Usuarios, Likes],
       synchronize: true,
     }),
     CancionesModule,

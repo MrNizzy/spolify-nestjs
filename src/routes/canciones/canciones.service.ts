@@ -4,6 +4,7 @@ import { Canciones } from 'src/entities/canciones.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Usuarios } from 'src/entities/usuarios.entity';
+import { updateCancionDto } from './dto/update-cancion.dto';
 
 @Injectable()
 export class CancionesService {
@@ -56,6 +57,10 @@ export class CancionesService {
         genero: genero,
       },
     });
+  }
+
+  async updateCancion(id: number, cancion: updateCancionDto) {
+    return this.cancionesRepository.update(id, cancion);
   }
 
   async obtenerCanciones() {

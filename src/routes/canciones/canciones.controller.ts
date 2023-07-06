@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   Res,
   UploadedFile,
@@ -19,6 +20,7 @@ import { CancionesService } from './canciones.service';
 import { cancionPostDto } from './dto/cancion-post.dto';
 import { Canciones } from 'src/entities/canciones.entity';
 import { generosDto } from './dto/generos.dto';
+import { updateCancionDto } from './dto/update-cancion.dto';
 
 @Controller('canciones')
 export class CancionesController {
@@ -71,7 +73,7 @@ export class CancionesController {
 
   @Post('generos')
   async getCancionesPorGenero(@Body() genero: generosDto) {
-    return this.cancionesService.getCancionesPorGenero(genero.nombre);
+    return this.cancionesService.getCancionesPorGenero(genero.genero);
   }
 
   @Get('generos/all')
@@ -95,6 +97,14 @@ export class CancionesController {
         .status(500)
         .send({ msg: 'Error al procesar la solicitud', error });
     }
+  }
+
+  @Patch('update/:id')
+  async updateCancion(
+    @Param('id') id: number,
+    @Body() cancion: updateCancionDto,
+  ) {
+    return this.cancionesService.updateCancion(id, cancion);
   }
 
   private async getAudioMetadata(filePath: string): Promise<any> {
