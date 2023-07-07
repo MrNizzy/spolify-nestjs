@@ -32,7 +32,7 @@ export class AuthService {
       where: { email: email },
     });
 
-    if (!findUser) throw new HttpException('Usuario no encontrado', 404);
+    if (!findUser) throw new HttpException('Cuenta no encontrada', 404);
 
     const checkPassword = await compare(password, findUser.password);
 
