@@ -63,6 +63,10 @@ export class CancionesService {
     return this.cancionesRepository.update(id, cancion);
   }
 
+  deleteCancion(id: number) {
+    return this.cancionesRepository.delete({ id });
+  }
+
   async obtenerCanciones() {
     return await this.cancionesRepository.find({ relations: ['usuario'] });
   }

@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -105,6 +106,11 @@ export class CancionesController {
     @Body() cancion: updateCancionDto,
   ) {
     return this.cancionesService.updateCancion(id, cancion);
+  }
+
+  @Delete('delete/:id')
+  deletePassword(@Param('id') id: number) {
+    return this.cancionesService.deleteCancion(id);
   }
 
   private async getAudioMetadata(filePath: string): Promise<any> {
